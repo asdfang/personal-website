@@ -97,18 +97,18 @@ const currentPath = Astro.url.pathname;
             <polyline points="7 7 17 7 17 17" />
           </svg>
         </a>
-        <span class="email-link" data-user="alex.s.fang" data-domain="gmail.com">
+        <a class="email-link" data-user="alex.s.fang" data-domain="gmail.com">
           <span class="footer-label">Email</span>
           <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
             <polyline points="22,6 12,13 2,6" />
           </svg>
-          <svg class="footer-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="17" x2="17" y2="7" />
-            <polyline points="7 7 17 7 17 17" />
+          <svg class="footer-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
           </svg>
           <span class="tooltip">Copied!</span>
-        </span>
+        </a>
       </footer>
     </div>
 
@@ -117,9 +117,16 @@ const currentPath = Astro.url.pathname;
         const user = el.getAttribute('data-user');
         const domain = el.getAttribute('data-domain');
         if (user && domain) {
-          el.addEventListener('click', () => {
-            navigator.clipboard.writeText(user + '@' + domain);
-            const tooltip = el.querySelector('.tooltip') as HTMLElement;
+          const email = user + '@' + domain;
+          el.setAttribute('href', 'mailto:' + email);
+
+          const tooltip = el.querySelector('.tooltip') as HTMLElement;
+
+          el.addEventListener('click', (e) => {
+            const isMobile = window.matchMedia('(pointer: coarse)').matches;
+            if (isMobile) return; // let mailto: open mail app
+            e.preventDefault();
+            navigator.clipboard.writeText(email);
             tooltip.classList.add('visible');
             setTimeout(() => tooltip.classList.remove('visible'), 1500);
           });

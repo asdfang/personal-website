@@ -147,8 +147,18 @@ body {
   margin-bottom: 0.4rem;
 }
 
-.tooltip.visible {
-  opacity: 1;
+@media (pointer: fine) {
+  .tooltip.visible {
+    opacity: 1;
+  }
+}
+
+.footer-copy {
+  transition: transform 0.2s ease;
+}
+
+.email-link:hover .footer-copy {
+  transform: translate(2px, -2px);
 }
 
 /* ---- Responsive ---- */
@@ -162,7 +172,8 @@ body {
   }
 
   .footer-label,
-  .footer-arrow {
+  .footer-arrow,
+  .footer-copy {
     display: none;
   }
 
@@ -173,4 +184,5 @@ body {
   .site-footer {
     justify-content: center;
   }
+
 }
