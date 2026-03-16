@@ -1,0 +1,159 @@
+:root {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+  --clr-bg: #0f0f0f;
+  --clr-fg: #e8e4df;
+  --clr-fg-muted: #9a9590;
+  --clr-accent: #c4a882;
+  --clr-border: #2a2724;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--clr-bg);
+  color: var(--clr-fg);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 580px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 8vh;
+  animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Site Nav ---- */
+.site-nav {
+  max-width: 580px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+.site-nav a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-fg-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: var(--clr-fg);
+}
+
+.site-nav a.active {
+  color: var(--clr-accent);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--clr-border);
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.site-footer a:hover {
+  opacity: 0.7;
+}
+
+.site-footer a svg {
+  transition: transform 0.2s ease;
+}
+
+.site-footer a:hover svg,
+.email-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ---- Email Link ---- */
+.email-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-accent);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.email-link:hover {
+  opacity: 0.7;
+}
+
+.email-link svg {
+  transition: transform 0.2s ease;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3rem 0.6rem;
+  background: var(--clr-fg);
+  color: var(--clr-bg);
+  font-size: 0.75rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  margin-bottom: 0.4rem;
+}
+
+.tooltip.visible {
+  opacity: 1;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .site-nav {
+    gap: 1rem;
+  }
+}

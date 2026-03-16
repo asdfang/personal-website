@@ -1,17 +1,69 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import headshot from '../assets/headshot.jpeg';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Alex Fang">
+  <div class="intro">
+    <div class="intro-text">
+      <h1>Alex Fang</h1>
+      <p class="tagline">Coder · Pianist · Educator</p>
+    </div>
+    <Image src={headshot} alt="Alex Fang" class="headshot" width={400} height={400} quality={90} />
+  </div>
+
+  <div class="bio">
+    <p>
+      I'm a software engineer with a background in computer science (BA/MS) and classical piano performance (BM, MM, DMA candidate).
+      I love building tools and solving problems that impact people's lives in meaningful and creative ways.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .headshot {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 60% center;
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: 0.0em;
+    line-height: 1.1;
+    color: var(--clr-fg);
+  }
+
+  .tagline {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--clr-fg-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .bio p {
+    margin-top: 1.75rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--clr-fg-muted);
+    font-weight: 400;
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

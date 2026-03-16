@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const videos = [
+  {
+    title: "Rachmaninoff Concerto No. 1 with SFCM Orchestra",
+    youtubeId: "_qCG0Cluwr0",
+  },
+  {
+    title: "Beethoven Sonata No. 32, Op. 111 (Mvt. I) on KingFM",
+    youtubeId: "Bn_-1wJYDe4",
+  },
+  {
+    title: "Brahms Concerto No. 2, Op. 83 (Mvt. I) with Harmonia Orchestra",
+    youtubeId: "fF6TTUaJNOI",
+  },
+  {
+    title: "Debussy Cloches à travers les feuilles (from Images, Book II)",
+    youtubeId: "NL9dNmHuhrM",
+  }
+];
+---
+
+<BaseLayout title="Music — Alex Fang" description="Piano performances by Alex Fang.">
+  <h1>Music</h1>
+
+  <div class="video-list">
+    {videos.map((video) => (
+      <div class="video-item">
+        <div class="video-embed">
+          <iframe
+            src={`https://www.youtube.com/embed/${video.youtubeId}`}
+            title={video.title}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+        <p class="video-title">{video.title}</p>
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-family: var(--font-display);
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--clr-fg);
+    margin-bottom: 2rem;
+  }
+
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-title {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--clr-fg-muted);
+  }
+
+  :global(.container) {
+    padding-bottom: 20vh;
+  }
+</style>

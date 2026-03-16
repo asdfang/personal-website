@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Alex Fang — Coder, pianist, and educator." } = Astro.props;
+
+const pages = [
+  { label: "About", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: "Music", href: "/music" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Nunito+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="site-nav">
+      {pages.map((page) => (
+        <a
+          href={page.href}
+          class:list={[{ active: currentPath === page.href }]}
+        >
+          {page.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="container">
+      <main>
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        {[
+          { label: "Resume", href: "/2026-03-13-resume.pdf" },
+          { label: "LinkedIn", href: "https://www.linkedin.com/in/alexsfang/" },
+          { label: "GitHub", href: "https://github.com/asdfang" },
+          { label: "YouTube", href: "https://www.youtube.com/@alexfangpiano" },
+        ].map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer">
+            {link.label}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </a>
+        ))}
+        <span class="email-link" data-user="alex.s.fang" data-domain="gmail.com">
+          Email
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+          <span class="tooltip">Copied!</span>
+        </span>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelectorAll('.email-link').forEach((el) => {
+        const user = el.getAttribute('data-user');
+        const domain = el.getAttribute('data-domain');
+        if (user && domain) {
+          el.addEventListener('click', () => {
+            navigator.clipboard.writeText(user + '@' + domain);
+            const tooltip = el.querySelector('.tooltip') as HTMLElement;
+            tooltip.classList.add('visible');
+            setTimeout(() => tooltip.classList.remove('visible'), 1500);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
