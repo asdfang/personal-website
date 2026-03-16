@@ -152,8 +152,25 @@ body {
 }
 
 /* ---- Responsive ---- */
+.footer-icon {
+  display: none;
+}
+
 @media (max-width: 480px) {
   .site-nav {
     gap: 1rem;
+  }
+
+  .footer-label,
+  .footer-arrow {
+    display: none;
+  }
+
+  .footer-icon {
+    display: block;
+  }
+
+  .site-footer {
+    justify-content: center;
   }
 }
